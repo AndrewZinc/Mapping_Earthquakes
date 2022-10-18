@@ -24,3 +24,12 @@ L.circle([34.0522, -118.2437], {
     fillOpacity: 0.6,
     radius: 300
  }).addTo(map);
+
+ // circleMarker
+ L.circleMarker([42.1435, -71.5245], {
+    stroke: 'true',
+    color: 'blue',
+    fill: 'true',
+    fillColor: 'fafa07',
+    radius: 25
+ }).addTo(map);

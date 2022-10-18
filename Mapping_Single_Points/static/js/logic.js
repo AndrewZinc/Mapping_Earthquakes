@@ -14,7 +14,8 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tile
 // Then we add our 'graymap' tile layer to the map.
 streets.addTo(map);
 
-var marker = L.marker([42.142872, -71.516830]).addTo(map);
+var marker = L.marker([42.142872, -71.516830]).addTo(map)
+.bindPopup('A town in Massachusetts.');
 
 L.circle([34.0522, -118.2437], {
     stroke: 'true',
@@ -32,4 +33,4 @@ L.circle([34.0522, -118.2437], {
     fill: 'true',
     fillColor: 'fafa07',
     radius: 25
- }).addTo(map);
+ }).addTo(map).bindPopup('A neighborhood in a town in Massachusetts.');

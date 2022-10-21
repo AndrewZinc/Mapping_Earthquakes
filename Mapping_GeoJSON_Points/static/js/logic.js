@@ -1,5 +1,3 @@
-// Add console log to see if our code is working.
-console.log("working");
 
 // Create a map object centered on the coords, with zoom level 4.
 let map = L.map("mapid").setView([37.5, -122.5], 10);

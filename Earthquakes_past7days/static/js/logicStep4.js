@@ -69,6 +69,8 @@ function createFeatures(earthquakeData) {
 };
 });
 
+
+
 function createMap(earthquakes) {
 // We create the tile layer that will be the background of our map.
    var streets = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -100,8 +102,40 @@ function createMap(earthquakes) {
    var map = L.map("mapid", {
       center: [39.5, -98.5],
       zoom: 3,
-      layers: [satelliteStreets]
+      layers: [satelliteStreets, earthquakes]
    });
+
+   // Add a legend
+   var legend = L.control({position: 'bottomright'});
+   console.log(legend);
+
+   // Build the legend
+   legend.onAdd = function () {
+      var div = L.DomUtil.create('div', 'info legend');
+
+      // Define colors that correspond to the magnitudes.
+      const magnitudes = [0, 1, 2, 3, 4, 5];
+      const colors = [
+      "#98ee00",
+      "#d4ee00",
+      "#eecc00",
+      "#ee9c00",
+      "#ea822c",
+      "#ea2c2c"
+      ];
+   
+      // Looping through our intervals to generate a label with a colored square for each interval.
+      for (var i = 0; i < magnitudes.length; i++) {
+         console.log(colors[i]);
+         div.innerHTML +=
+         "<i style='background: " + colors[i] + "'></i> " +
+         magnitudes[i] + (magnitudes[i + 1] ? "&ndash;" + magnitudes[i + 1] + "<br>" : "+");
+      }
+      return div;
+   };
+
+   // Add the legend to the map
+   legend.addTo(map);
 
    // Pass our map layers into the layers control and add the layers control to the map.
    L.control.layers(baseMaps, overlays, {

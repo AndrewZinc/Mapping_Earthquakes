@@ -1,16 +1,18 @@
 
-let airData = d3.json("https://raw.githubusercontent.com/AndrewZinc/Mapping_Earthquakes/Mapping_GeoJSON_Points/Mapping_GeoJSON_Points/majorAirports.json");
+let flightData = "torontoRoutes.json";
 
-console.log(airData);
+console.log(flightData);
 
-airData.then(function(data) {
+d3.json(flightData).then(function(data) {
+   console.log(data);
    // Place our GeoJSON feature on the map.
    createFeatures(data.features);
   });
 
+ 
 function createFeatures(flightData) {
    function onEachFeature (feature, layer) {
-      layer.bindPopup("<h2>Airport Code: " + feature.properties.faa +"<hr>Airport Name: "+ feature.properties.name +"</h2>");
+      layer.bindPopup("<h2>Airline: " + feature.properties.airline +"<hr>Destination: "+ feature.properties.dst +"</h2>");
    }
 
    var flights = L.geoJSON(flightData, {
@@ -44,15 +46,17 @@ function createMap(flights) {
    };
 
    var overlayMaps = {
-      "Major Airports": flights
+      "Toronto Flights": flights
    };
 
-   // Create a map object centered on the coords, with zoom level 4.
+   // Create a map object centered on the coords, with zoom level 2.
    var map = L.map("mapid", {
-      center: [30, 30],
+      center: [44, -80.0],
       zoom: 2,
       layers: [streets, flights]
    });
+
+
 
    // Pass our map layers into the layers control and add the layers control to the map.
    L.control.layers(baseMaps, overlayMaps, {
